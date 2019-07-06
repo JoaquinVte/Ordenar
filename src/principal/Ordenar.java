@@ -1,37 +1,77 @@
 package principal;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
+import java.util.Scanner;
 
 public class Ordenar {
 	public static void main(String[] args) {
-		
-		// Tamaño del vector para ordenar
-		int size = 10000;
-		
-		// Descomentar para utilzar un vector de tamaño variable
+
+		Scanner entrada = new Scanner(System.in);
+
+		System.out.println("Tamaño del vector a ordenar:");
+		int size = entrada.nextInt();
+		System.out.println("Valor maximo de entero a almacenar:");
+		int valor = entrada.nextInt();
 		int[] vector = new int[size];
-		rellenarArrary(vector);
+		rellenarArrary(vector,valor);
 
-		// Descomentar para utilizar un vector fijo
-		//int[] vector = {7,1,5,2,0,8,3,4,9,15,83,45,11,6};
+		// Descomentar para comprobar el vector antes de ser ordenado.
+		System.out.println("Antes de ordenar");
+		mostrar(vector);
 
-		// Descomentar para ver el vector antes de la ordenacion
-		// mostrar(vector);
+		System.out.println("Metodo de ordenacion:");
+		System.out.println("1- burbuja");
+		System.out.println("2- burbujaMejoradaV1");
+		System.out.println("3- burbujaMejoradaV2");
+		System.out.println("4- insercion");
+		System.out.println("5- seleccion");
+		System.out.println("6- shellSort");
+		System.out.println("7- mergeSort");
+		System.out.println("8- Quicksort");
+		System.out.println("Elija opcion [1-8]:");
+		int opcion = entrada.nextInt();
 
 		// Instante antes de ordenar
 		long before = System.currentTimeMillis();
 
-		// Descomentar el metodo de ordenacion deseado;
-		// burbuja(vector);
-		// burbujaMejoradaV1(vector);
-		// burbujaMejoradaV2(vector);
-		// insercion(vector);
-		// seleccion(vector);
-		// shellSort(vector);
-		mergeSort(vector, 0, vector.length);
-		// Quicksort(vector, 0, vector.length - 1);
-		
+		switch (opcion) {
+		case 1:
+			System.out.println("Seleccionado el metodo burbuja.");
+			burbuja(vector);
+			break;
+		case 2:
+			System.out.println("Seleccionado el metodo burbujaMejoradaV1.");
+			burbujaMejoradaV1(vector);
+			break;
+		case 3:
+			System.out.println("Seleccionado el metodo burbujaMejoradaV2.");
+			burbujaMejoradaV2(vector);
+			break;
+		case 4:
+			System.out.println("Seleccionado el metodo insercion.");
+			insercion(vector);
+			break;
+		case 5:
+			System.out.println("Seleccionado el metodo seleccion.");
+			seleccion(vector);
+			break;
+		case 6:
+			System.out.println("Seleccionado el metodo shellSort.");
+			shellSort(vector);
+			break;
+		case 7:
+			System.out.println("Seleccionado el metodo mergeSort.");
+			mergeSort(vector, 0, vector.length);
+			break;
+		case 8:
+			System.out.println("Seleccionado el metodo Quicksort.");
+			Quicksort(vector, 0, vector.length - 1);
+			break;
+		default:
+			System.out.println("Opcion no valida");
+			break;
+
+		}
+
 		// Instante despues de ordenar
 		long after = System.currentTimeMillis();
 
@@ -40,13 +80,16 @@ public class Ordenar {
 		int segundos = (int) Math.abs(duration / 1000);
 		int minutos = (int) Math.abs(duration / (60 * 1000));
 
+		// Descomentar para comprobar que el vector ha sido ordenado.
+		System.out.println("Despues de ordenar");
+		mostrar(vector);
+
 		System.out.println("Tiempo empleado en la ordenacion para un vector de " + size + " elementos.");
 		System.out.println("Milisegundos:\t " + duration + "ms.");
 		System.out.println("Segundos:\t " + segundos + "s.");
 		System.out.println("Minutos:\t " + minutos + "m. " + (segundos - minutos * 60) + "s.");
 
-		// Descomentar para comprobar que el vector ha sido ordenado.
-		//mostrar(vector);
+		entrada.close();
 	}
 
 	/*
@@ -65,11 +108,11 @@ public class Ordenar {
 		// comparando cada elemento con su vecino de la derecha
 		// se intercambian si son igualles.
 		for (i = 1; i < arreglo.length; i++) {
-			//System.out.println("Pasada " + i);
+			// System.out.println("Pasada " + i);
 			for (j = 0; j < arreglo.length - 1; j++) {
 				if (arreglo[j] > arreglo[j + 1]) {
 					intercambiar(arreglo, j, j + 1);
-					//mostrar(arreglo);
+					// mostrar(arreglo);
 				}
 			}
 		}
@@ -426,9 +469,9 @@ public class Ordenar {
 	}
 
 	// Metodo para rellenar un vector con enteros aleatorios
-	public static void rellenarArrary(int[] anArray) {
+	public static void rellenarArrary(int[] anArray,int valor) {
 		for (int i = 0; i < anArray.length; i++) {
-			anArray[i] = (int) (Math.random() * 10000000);
+			anArray[i] = (int) (Math.random() * valor);
 		}
 	}
 }
